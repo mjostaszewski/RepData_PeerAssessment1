@@ -119,7 +119,7 @@ qplot(data = ivalsteps, x = interval, y = steps.per.interval, geom = "line",
             scale_y_continuous(name = "Nb of steps (mean)")
 ```
 
-![](PA1_template_files/figure-html/intervals plot-1.png)<!-- -->
+![](PA1_template_files/figure-html/intervals-plot-1.png)<!-- -->
 
 ### 2. The 5-minute interval that, on average, contains the maximum number of steps
 
@@ -182,7 +182,7 @@ qplot(data = new.daysteps, steps.per.day, binwidth = 3000,
               scale_x_continuous(name = "Steps/day")
 ```
 
-![](PA1_template_files/figure-html/histogram with imputed data-1.png)<!-- -->
+![](PA1_template_files/figure-html/histogram-with-imputed-data-1.png)<!-- -->
 
 Here are the values of the mean and median total number of steps taken per day.
 
@@ -234,6 +234,6 @@ qplot(data = new.ivalsteps.tow, x = interval, y = steps.per.interval, geom = "li
             scale_y_continuous(name = "Nb of steps (mean)")
 ```
 
-![](PA1_template_files/figure-html/imputed intervals plot-1.png)<!-- -->
+![](PA1_template_files/figure-html/imputed-intervals-plot-1.png)<!-- -->
 
 From the figure above we can see that on weekends the subject moade more steps, on average, in the afternoon, and his/her morning activity was more intensive on weekdays.

@@ -64,7 +64,7 @@ median(daysteps$steps.per.day)
 
 Here is the time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis). **ivalsteps** is a table from grouping by *interval* and adding all the values in groups.
 
-```{r intervals plot}
+```{r intervals-plot}
 ivalsteps <- data %>% 
               group_by(interval) %>% 
               summarize(steps.per.interval = mean(steps, na.rm = TRUE))
@@ -78,7 +78,7 @@ qplot(data = ivalsteps, x = interval, y = steps.per.interval, geom = "line",
 
 Here's the 5-minute interval, on average across all the days in the dataset, that contains the maximum number of steps.
 
-```{r max interval}
+```{r max-interval}
 with(ivalsteps, interval[which.max(steps.per.interval)])
 ```
 
@@ -90,7 +90,7 @@ From the interval id we can conclude it was 8:35 AM. The subject moves the most,
 
 Here's the calculation and report of the total number of missing values in the dataset.
 
-```{r number of NAs}
+```{r number-of-NAs}
 sum(is.na(data$steps))
 ```
 
@@ -103,7 +103,7 @@ The missing step values will be replaced per 5-min time interval, by the mean va
 
 I'm adding a new column to the **data** table, called *imputed.steps*, taking the mean value from previously calculated **ivalsteps**. The shape is different from the previous histogram, especially at the bin containing 0 value.
 
-```{r impute NAs}
+```{r impute-NAs}
 new.data <- data
 for(row in which(is.na(new.data$steps))) {
   new.data$steps[row] = ivalsteps$steps.per.interval[ivalsteps$interval == new.data$interval[row]]
@@ -114,7 +114,7 @@ for(row in which(is.na(new.data$steps))) {
 
 Here is a histogram of the total number of steps taken each day in the new dataset.
 
-```{r histogram with imputed data}
+```{r histogram-with-imputed-data}
 new.daysteps <- new.data %>% 
                 group_by(date) %>% 
                 summarize(steps.per.day = sum(steps))
@@ -139,7 +139,7 @@ Both mean and median have increased, and they are equal.
 
 I'm creating the new factor variable, *tow* (time of the week), equal to "Weekend" for Daturday and Sunday, and to "Weekday" on other days.
 
-```{r imputed data time of the week}
+```{r imputed-data-time-of-the-week}
 we = c("Saturday","Sunday")
 new.data <- mutate(new.data, tow = as.factor(ifelse(weekdays(date) %in% we, "Weekend", "Weekday")))
 ```
@@ -148,7 +148,7 @@ new.data <- mutate(new.data, tow = as.factor(ifelse(weekdays(date) %in% we, "Wee
 
 I'm creating interval averages, grouping by *interval* and *tow* and averaging the steps in each group. This is for the imputed dataset. This data is used for panel plot comparing the average number of steps per interval between weekends and weekdays.
 
-```{r imputed intervals plot}
+```{r imputed-intervals-plot}
 new.ivalsteps.tow <- new.data %>%
                       group_by(interval, tow) %>% 
                       summarize(steps.per.interval = mean(steps))
